@@ -43,7 +43,7 @@ async function fetchData() {
             Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
         } else {
           const photoCards = data.hits.map((img) => createPhotoCard(img)).join('');
-          gallery.append(...photoCards);
+          gallery.append(photoCards);
 
           if (data.totalHits > perPage) {
                 loadMoreBtn.style.display = "block";
@@ -52,7 +52,7 @@ async function fetchData() {
           }
         }
     } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error', error);
   }
 }
 
@@ -71,6 +71,5 @@ function loadMorePages() {
   page += 1;
   fetchData();
 }
-
 searchForm.addEventListener('submit', handleSearchFormSubmit);
 loadMoreBtn.addEventListener('click', loadMorePages);
