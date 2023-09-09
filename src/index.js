@@ -8,6 +8,7 @@ let page = 1;
 const API_KEY = "39227373-dd01e2c6342e880b425481406";
 let perPage = 40;
 let searchQuery = '';
+let totalHits = 0;
 loadMoreBtn.style.display = "none";
 function createPhotoCard(img) {
     const createCard = `<div class="photo-card">
@@ -45,10 +46,10 @@ async function fetchData() {
           const photoCards = data.hits.map((img) => createPhotoCard(img)).join('');
           gallery.append(photoCards);
 
-          if (data.totalHits > perPage) {
-                loadMoreBtn.style.display = "block";
+          if (data.totalHits <= page * perPage) {
+                loadMoreBtn.style.display = "none";
             } else {
-              loadMoreBtn.style.display = "none";
+              loadMoreBtn.style.display = "block";
           }
         }
     } catch (error) {
